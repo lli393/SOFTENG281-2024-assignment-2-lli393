@@ -17,6 +17,8 @@ public class Game {
     // increment on round number each iteration
     roundnumber++;
     MessageCli.START_ROUND.printMessage(Integer.toString(roundnumber));
+    // ask player for finger
+    MessageCli.ASK_INPUT.printMessage();
   }
 
   public void endGame() {}
