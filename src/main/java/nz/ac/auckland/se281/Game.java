@@ -21,16 +21,11 @@ public class Game {
     MessageCli.ASK_INPUT.printMessage();
     // fetch for player's input
     String input = Utils.scanner.nextLine();
-    // if player's input is larger than 5
-    if (Integer.parseInt(input) > 5) {
+    // if player's input is outside of range 0-5
+    if (Integer.parseInt(input) > 5 || Integer.parseInt(input) < 0) {
       // print error message
       MessageCli.INVALID_INPUT.printMessage();
     }
-  }
-
-  private boolean IntergerParseint(String input) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'IntergerParseint'");
   }
 
   public void endGame() {}
