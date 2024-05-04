@@ -7,55 +7,89 @@ import nz.ac.auckland.se281.Main.Difficulty;
 /** This class represents the Game is the main entry point. */
 public class Game {
   // intialise fields
-  int roundnumber = 0;
+  int roundNumber = 0;
   Difficulty difficulty;
-
+  Choice choice;
   // player's detail
-  String playername;
-  String playerinput;
+  String playerName;
+  String playerInput;
   // ai's detail
-  int aiinput;
+  int aiInput;
+  // result of sum
+  int sumInput;
+  String sumChoice;
   // sum of wins
-  int playerwin;
-  int aiwin;
+  int playerWin;
+  int aiWin;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
-    playername = options[0];
-    MessageCli.WELCOME_PLAYER.printMessage(options[0]);
+    playerName = options[0];
+    MessageCli.WELCOME_PLAYER.printMessage(playerName);
     this.difficulty = difficulty;
+    this.choice = choice;
   }
 
   public void play() {
     // increment on round number each iteration
-    roundnumber++;
-    MessageCli.START_ROUND.printMessage(Integer.toString(roundnumber));
+    roundNumber++;
+    MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     // ask player for finger
     MessageCli.ASK_INPUT.printMessage();
     // fetch for player's input
-    playerinput = Utils.scanner.nextLine();
+    playerInput = Utils.scanner.nextLine();
     // as long as player's input is outside of range 0-5
-    while (Integer.parseInt(playerinput) > 5 || Integer.parseInt(playerinput) < 0) {
+    while (Integer.parseInt(playerInput) > 5 || Integer.parseInt(playerInput) < 0) {
       // print error message
       MessageCli.INVALID_INPUT.printMessage();
       // ask player for finger again
       MessageCli.ASK_INPUT.printMessage();
       // fetch for player's input, exit while loop with appropriate input
-      playerinput = Utils.scanner.nextLine();
+      playerInput = Utils.scanner.nextLine();
     }
     // print player's name and finger input amount
-    MessageCli.PRINT_INFO_HAND.printMessage(playername, playerinput);
+    MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerInput);
 
     // get ai's input
     // if the player choose easy
     if (difficulty == Difficulty.EASY) {
       // ai select random integers from 0-5
-      // https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java#:~:text=import%20java.util.Random%3B%20Random%20rand%20%3D%20new%20Random%28%29%3B%20%2F%2F,to%20get%20a%20number%20from%20the%20required%20range
-      Random randomnumber = new Random();
-      aiinput = randomnumber.nextInt(6); // range: 0-n bound/inside bracket=n+1
+      Random randomnumber = new Random(1);
+      aiInput = randomnumber.nextInt(6); // range: 0-n bound/inside bracket=n+1
     }
     // print ai's name and finger input amount
-    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiinput));
+    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiInput));
+
+    // result of the round
+    sumInput = Integer.parseInt(playerInput) + aiInput;
+    // compare player's input and ai's input, if both are odd or even
+    if ((Integer.parseInt(playerInput) % 2) == (aiInput) % 2) {
+      // even will win
+      sumChoice = "EVEN";
+      if (choice == Choice.EVEN) {
+        playerWin++;
+        // print result
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(sumInput), sumChoice, playerName);
+      } else {
+        aiWin++;
+        // print result
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(sumInput), sumChoice, "HAL-9000");
+      }
+    } else {
+      // odd will win
+      sumChoice = "ODD";
+      if (choice == Choice.ODD) {
+        playerWin++;
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(sumInput), sumChoice, playerName);
+      } else {
+        aiWin++;
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(sumInput), sumChoice, "HAL-9000");
+      }
+    }
   }
 
   public void endGame() {}
