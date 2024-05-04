@@ -23,10 +23,14 @@ public class Game {
     MessageCli.ASK_INPUT.printMessage();
     // fetch for player's input
     String input = Utils.scanner.nextLine();
-    // if player's input is outside of range 0-5
-    if (Integer.parseInt(input) > 5 || Integer.parseInt(input) < 0) {
+    // as long as player's input is outside of range 0-5
+    while (Integer.parseInt(input) > 5 || Integer.parseInt(input) < 0) {
       // print error message
       MessageCli.INVALID_INPUT.printMessage();
+      // ask player for finger again
+      MessageCli.ASK_INPUT.printMessage();
+      // fetch for player's input, exit while loop with appropriate input
+      input = Utils.scanner.nextLine();
     }
     MessageCli.PRINT_INFO_HAND.printMessage(playername, input);
   }
