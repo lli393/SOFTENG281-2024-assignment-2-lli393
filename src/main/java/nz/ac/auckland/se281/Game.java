@@ -1,6 +1,5 @@
 package nz.ac.auckland.se281;
 
-import java.util.Random;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
@@ -54,42 +53,10 @@ public class Game {
     // if the player choose easy
     if (difficulty == Difficulty.EASY) {
       // ai select random integers from 0-5
-      Random randomnumber = new Random(1);
-      aiInput = randomnumber.nextInt(6); // range: 0-n bound/inside bracket=n+1
+      aiInput = Utils.getRandomNumberRange(0, 5); // range: 0-n bound/inside bracket=n+1
     }
     // print ai's name and finger input amount
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiInput));
-
-    // result of the round
-    sumInput = Integer.parseInt(playerInput) + aiInput;
-    // compare player's input and ai's input, if both are odd or even
-    if ((Integer.parseInt(playerInput) % 2) == (aiInput) % 2) {
-      // even will win
-      sumChoice = "EVEN";
-      if (choice == Choice.EVEN) {
-        playerWin++;
-        // print result
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-            Integer.toString(sumInput), sumChoice, playerName);
-      } else {
-        aiWin++;
-        // print result
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-            Integer.toString(sumInput), sumChoice, "HAL-9000");
-      }
-    } else {
-      // odd will win
-      sumChoice = "ODD";
-      if (choice == Choice.ODD) {
-        playerWin++;
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-            Integer.toString(sumInput), sumChoice, playerName);
-      } else {
-        aiWin++;
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-            Integer.toString(sumInput), sumChoice, "HAL-9000");
-      }
-    }
   }
 
   public void endGame() {}
