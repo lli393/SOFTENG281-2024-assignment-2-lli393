@@ -5,11 +5,13 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 /** This class represents the Game is the main entry point. */
 public class Game {
-  // intialised fields
+  // intialise fields
   int roundnumber = 0;
+  String playername;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
+    playername = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
   }
 
@@ -26,6 +28,7 @@ public class Game {
       // print error message
       MessageCli.INVALID_INPUT.printMessage();
     }
+    MessageCli.PRINT_INFO_HAND.printMessage(playername, input);
   }
 
   public void endGame() {}
