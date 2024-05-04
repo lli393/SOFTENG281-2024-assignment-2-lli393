@@ -16,7 +16,7 @@ public class Game {
   int aiInput;
   // result of sum
   int sumInput;
-  String sumChoice;
+  Choice sumChoice;
   // sum of wins
   int playerWin;
   int aiWin;
@@ -57,6 +57,30 @@ public class Game {
     }
     // print ai's name and finger input amount
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiInput));
+
+    // get result sum for player and ai
+    sumInput = Integer.parseInt(playerInput) + aiInput;
+    // get result sum is even or odd
+    if (Utils.isEven(sumInput)) {
+      // if even store winning choice
+      sumChoice = Choice.EVEN;
+    } else if (Utils.isOdd(sumInput)) {
+      // if odd
+      sumChoice = Choice.ODD;
+    }
+    // check what player have choosen and check if it matches with the winning choice
+    if (choice == sumChoice) {
+      // player win
+      playerWin++;
+    }
+    {
+      // ai win
+      aiWin++;
+    }
+
+    // print result of this round if winner is player
+    MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+        Integer.toString(sumInput), sumChoice.toString(), playerName);
   }
 
   public void endGame() {}
