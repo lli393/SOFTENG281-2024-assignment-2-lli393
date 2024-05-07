@@ -91,6 +91,7 @@ public class Game {
     }
 
     // print result of this round for winner
+    // print result of this round for winner
     MessageCli.PRINT_OUTCOME_ROUND.printMessage(
         Integer.toString(sumInput), sumChoice.toString(), winName);
   }
