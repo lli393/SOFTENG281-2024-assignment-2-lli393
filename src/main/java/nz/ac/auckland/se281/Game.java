@@ -12,6 +12,9 @@ public class Game {
   // player's detail
   String playerName;
   String playerInput;
+  Choice playerChoice;
+  // record user's predominant choice by odd and even counter
+  int evenCount = 0;
   // ai's detail
   int aiInput;
   // result of sum
@@ -20,6 +23,7 @@ public class Game {
   // sum of wins
   int playerWin;
   int aiWin;
+  String winName;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -48,13 +52,20 @@ public class Game {
     }
     // print player's name and finger input amount
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerInput);
-
-    // get ai's input
-    // if the player choose easy
-    if (difficulty == Difficulty.EASY) {
-      // ai select random integers from 0-5
-      aiInput = Utils.getRandomNumberRange(0, 5); // range: 0-n bound/inside bracket=n+1
+    // determine whether player's input is even or odd
+    if (Utils.isEven(Integer.parseInt(playerInput))) {
+      playerChoice = Choice.EVEN;
+      evenCount++;
+    } else {
+      playerChoice = Choice.ODD;
     }
+
+    // give input of difficulty to factory that returns which method to use(Easy, Medium, Hard)
+    DifficultyLevel level =
+        new DifficultyFactory(roundNumber, evenCount, choice).createDifficulty(difficulty);
+    // use the method to get strategy
+    aiInput = level.getStrategy().getRandomNumber();
+
     // print ai's name and finger input amount
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiInput));
 
@@ -72,15 +83,16 @@ public class Game {
     if (choice == sumChoice) {
       // player win
       playerWin++;
-    }
-    {
+      winName = playerName;
+    } else {
       // ai win
       aiWin++;
+      winName = "HAL-9000";
     }
 
-    // print result of this round if winner is player
+    // print result of this round for winner
     MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-        Integer.toString(sumInput), sumChoice.toString(), playerName);
+        Integer.toString(sumInput), sumChoice.toString(), winName);
   }
 
   public void endGame() {}
