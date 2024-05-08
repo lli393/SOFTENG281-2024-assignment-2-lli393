@@ -11,11 +11,14 @@ public class DifficultyFactory {
 
   // get player's choice
   Choice choice;
+  // get if player won last round
+  boolean win;
 
-  public DifficultyFactory(int roundNumber, int evenCount, Choice choice) {
+  public DifficultyFactory(int roundNumber, int evenCount, Choice choice, boolean win) {
     this.roundNumber = roundNumber;
     this.evenCount = evenCount;
     this.choice = choice;
+    this.win = win;
   }
 
   public DifficultyLevel createDifficulty(Difficulty difficulty) {
@@ -31,7 +34,7 @@ public class DifficultyFactory {
 
       case HARD:
         // if the difficulty is hard, use a Hard
-        return null;
+        return new HardLevel(roundNumber, choice, evenCount, win);
     }
     return null;
   }

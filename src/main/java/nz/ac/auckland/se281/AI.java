@@ -2,17 +2,21 @@ package nz.ac.auckland.se281;
 
 public class AI {
 
-  Strategy type;
+  private Strategy type;
 
   public AI(Strategy type) {
     this.type = type;
   }
 
-  public int getNum() {
+  public int getAINum() {
     return type.getRandomNumber();
   }
 
   public void setStrategy(Strategy type) {
     this.type = type;
+  }
+
+  public Strategy getAIStrategy() {
+    return type;
   }
 }

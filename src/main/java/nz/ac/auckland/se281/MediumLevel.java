@@ -17,14 +17,14 @@ public class MediumLevel implements DifficultyLevel {
   }
 
   @Override
-  public Strategy getStrategy() {
+  public AI getStrategy() {
 
     // use random strategy for the first 3 round, switch to top strategy afterwards
     if (roundNumber <= 3) {
-      return new RandomStrategy();
+      return new AI(new RandomStrategy());
     } else {
 
-      return new TopStrategy(choice, evenCount, oddCount);
+      return new AI(new TopStrategy(choice, evenCount, oddCount));
     }
   }
 }

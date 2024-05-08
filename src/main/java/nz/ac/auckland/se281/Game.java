@@ -22,6 +22,7 @@ public class Game {
   Choice sumChoice;
   // sum of wins
   int playerWin;
+  boolean win = false;
   int aiWin;
   String winName;
 
@@ -62,9 +63,11 @@ public class Game {
 
     // give input of difficulty to factory that returns which method to use(Easy, Medium, Hard)
     DifficultyLevel level =
-        new DifficultyFactory(roundNumber, evenCount, choice).createDifficulty(difficulty);
+        new DifficultyFactory(roundNumber, evenCount, choice, win).createDifficulty(difficulty);
     // use the method to get strategy
-    aiInput = level.getStrategy().getRandomNumber();
+    // create ai
+    AI ai = level.getStrategy();
+    aiInput = ai.getAINum();
 
     // print ai's name and finger input amount
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiInput));
@@ -83,10 +86,12 @@ public class Game {
     if (choice == sumChoice) {
       // player win
       playerWin++;
+      win = true;
       winName = playerName;
     } else {
       // ai win
       aiWin++;
+      win = false;
       winName = "HAL-9000";
     }
 
