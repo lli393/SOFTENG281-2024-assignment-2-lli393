@@ -127,11 +127,22 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+
     // return total result of player
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         playerName, Integer.toString(playerWin), Integer.toString(aiWin));
     // return total result of player
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         "HAL-9000", Integer.toString(aiWin), Integer.toString(playerWin));
+
+    // check if tie
+    if (playerWin == aiWin) {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
+    } else if (playerWin > aiWin) {
+      // if player wins
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
+    } else if (aiWin > playerWin) {
+      MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+    }
   }
 }
