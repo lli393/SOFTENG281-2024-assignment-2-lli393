@@ -10,7 +10,7 @@ public class Game {
   Difficulty difficulty;
   Choice choice;
   // player's detail
-  String playerName;
+  String playerName = null;
   String playerInput;
   Choice playerChoice;
   // record user's predominant choice by odd and even counter
@@ -35,6 +35,11 @@ public class Game {
   }
 
   public void play() {
+    // check if they started a new game
+    if (playerName == null) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
     // increment on round number each iteration
     roundNumber++;
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
@@ -66,7 +71,7 @@ public class Game {
         new DifficultyFactory(roundNumber, evenCount, choice, win).createDifficulty(difficulty);
     // use the method to get strategy
     // create ai
-    AI ai = level.getStrategy();
+    AIInstance ai = level.getStrategy();
     aiInput = ai.getAINum();
 
     // print ai's name and finger input amount

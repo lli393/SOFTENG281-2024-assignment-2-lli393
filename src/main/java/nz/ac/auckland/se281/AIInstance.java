@@ -1,10 +1,10 @@
 package nz.ac.auckland.se281;
 
-public class AI {
+public class AIInstance {
 
   private Strategy type;
 
-  public AI(Strategy type) {
+  public AIInstance(Strategy type) {
     this.type = type;
   }
 

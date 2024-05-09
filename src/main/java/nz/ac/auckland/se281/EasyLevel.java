@@ -3,8 +3,8 @@ package nz.ac.auckland.se281;
 public class EasyLevel implements DifficultyLevel {
 
   @Override
-  public AI getStrategy() {
+  public AIInstance getStrategy() {
     // create random object
-    return new AI(new RandomStrategy());
+    return new AIInstance(new RandomStrategy());
   }
 }
