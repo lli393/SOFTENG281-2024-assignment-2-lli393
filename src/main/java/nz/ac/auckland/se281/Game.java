@@ -112,11 +112,7 @@ public class Game {
   }
 
   public void endGame() {
-    // check if they started a new game
-    if (playerName == null) {
-      MessageCli.GAME_NOT_STARTED.printMessage();
-      return;
-    }
+    this.showStats();
     // set playerName to null as a sign of game ended
     playerName = null;
   }
