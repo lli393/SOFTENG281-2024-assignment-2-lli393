@@ -118,6 +118,8 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+    // set playerName to null as a sign of game ended
+    playerName = null;
   }
 
   public void showStats() {
