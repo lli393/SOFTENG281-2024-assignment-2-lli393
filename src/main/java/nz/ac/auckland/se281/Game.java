@@ -32,6 +32,12 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
     this.difficulty = difficulty;
     this.choice = choice;
+    // initialise counts
+    roundNumber = 0;
+    evenCount = 0;
+    playerWin = 0;
+    aiWin = 0;
+    win = false;
   }
 
   public void play() {
