@@ -112,7 +112,19 @@ public class Game {
         Integer.toString(sumInput), sumChoice.toString(), winName);
   }
 
-  public void endGame() {}
+  public void endGame() {
+    // check if they started a new game
+    if (playerName == null) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+  }
 
-  public void showStats() {}
+  public void showStats() {
+    // check if they started a new game
+    if (playerName == null) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+  }
 }
