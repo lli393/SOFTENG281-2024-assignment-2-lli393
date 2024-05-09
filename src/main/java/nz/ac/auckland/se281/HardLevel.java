@@ -7,7 +7,10 @@ public class HardLevel implements DifficultyLevel {
   Choice choice;
   int evenCount;
   int oddCount;
-  boolean win = false;
+  boolean win;
+
+  // create ai
+  AI ai = new AI(new RandomStrategy());
 
   public HardLevel(int roundNumber, Choice choice, int evenCount, boolean win) {
     this.roundNumber = roundNumber;
@@ -19,16 +22,14 @@ public class HardLevel implements DifficultyLevel {
 
   @Override
   public AI getStrategy() {
-    // create ai
-    AI ai = new AI(new RandomStrategy());
 
     // use random strategy for the first 3 round, switch to random or top strategy afterwards
     if (roundNumber <= 3) {
       return ai;
-    } else if (win) {
+    } else if (win || roundNumber == 4) {
       // if player win and ai lose, switch the strategy
       // if ai is at random strategy change to top
-      if (ai.getAIStrategy().equals(new RandomStrategy())) {
+      if (ai.getAIStrategy() instanceof RandomStrategy) {
         ai.setStrategy(new TopStrategy(choice, evenCount, oddCount));
         // else if ai is at top change to random
       } else {
