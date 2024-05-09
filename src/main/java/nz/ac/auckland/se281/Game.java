@@ -107,7 +107,6 @@ public class Game {
     }
 
     // print result of this round for winner
-    // print result of this round for winner
     MessageCli.PRINT_OUTCOME_ROUND.printMessage(
         Integer.toString(sumInput), sumChoice.toString(), winName);
   }
@@ -128,5 +127,11 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+    // return total result of player
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        playerName, Integer.toString(playerWin), Integer.toString(aiWin));
+    // return total result of player
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "HAL-9000", Integer.toString(aiWin), Integer.toString(playerWin));
   }
 }
