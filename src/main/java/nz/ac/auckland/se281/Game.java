@@ -6,25 +6,33 @@ import nz.ac.auckland.se281.Main.Difficulty;
 /** This class represents the Game is the main entry point. */
 public class Game {
   // intialise fields
-  int roundNumber = 0;
-  Choice choice;
+  private int roundNumber = 0;
+  protected Choice choice;
   // player's detail
-  String playerName = null;
-  String playerInput;
+  private String playerName = null;
+  private String playerInput;
   // record user's predominant choice by odd and even counter
-  int evenCount = 0;
+  protected int evenCount = 0;
   // ai's detail
-  int aiInput;
-  AIInstance aiInstance;
+  private int aiInput;
+  private ArtificialIntelligence ArtificialIntelligence;
   // result of sum
-  int sumInput;
-  Choice sumChoice;
+  private int sumInput;
+  private Choice sumChoice;
   // sum of wins
-  int playerWin;
-  int aiWin;
-  boolean win = false;
-  String winName;
+  private int playerWin;
+  private int aiWin;
+  protected boolean win = false;
+  private String winName;
 
+  /**
+   * This method creates a new game. Every element is cleared when new game is created, doesn't
+   * store previous player's informations.
+   *
+   * @param difficulty the difficulty of the game base on player's input (Easy, medium, hard)
+   * @param choice the choice of the player, player want sum to be this in order to win (Even, odd)
+   * @param options an array of String, first element is the name of player
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     playerName = options[0];
@@ -32,7 +40,7 @@ public class Game {
 
     // give input of difficulty to factory that returns which method to use(Easy, Medium, Hard)
     // create in here avoid new object every time game method is run
-    aiInstance = new DifficultyFactory().createDifficulty(difficulty, choice);
+    ArtificialIntelligence = new DifficultyFactory().createDifficulty(difficulty, choice);
 
     this.choice = choice;
     // intialise all counts
@@ -43,6 +51,11 @@ public class Game {
     win = false;
   }
 
+  /**
+   * This method asks player for finger input amount, response with ai's finger input amount, get
+   * the sum and displays who is the winner of this round. This method can only run when a game is
+   * running.
+   */
   public void play() {
     // check if they started a new game
     if (playerName == null) {
@@ -71,7 +84,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerInput);
 
     // get aiInput from method in aiInstance class
-    aiInput = aiInstance.getAIRandomNumber(evenCount, win);
+    aiInput = ArtificialIntelligence.getRobotNumber(evenCount, win);
 
     // print ai's name and finger input amount
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiInput));
@@ -93,12 +106,12 @@ public class Game {
     }
     // check what player have choosen and check if it matches with the winning choice
     if (choice == sumChoice) {
-      // player win
+      // set value to the following if player has win the game
       playerWin++;
       win = true;
       winName = playerName;
     } else {
-      // ai win
+      // set value to the following if ai win the game
       aiWin++;
       win = false;
       winName = "HAL-9000";
@@ -109,6 +122,9 @@ public class Game {
         Integer.toString(sumInput), sumChoice.toString(), winName);
   }
 
+  /**
+   * This method prints the overall output of the game, by displaying the statistics and the winner.
+   */
   public void endGame() {
     this.showStats();
     if (playerName != null) {
@@ -126,8 +142,13 @@ public class Game {
     }
   }
 
+  /**
+   * This method is used to show the statistic of both player and ai on the current round. This
+   * method can only run when a game is running, it shows for each player how many rounds they won
+   * and how many rounds they need to win the game.
+   */
   public void showStats() {
-    // check if they started a new game
+    // check if they are in a game, if not the playerName should be null
     if (playerName == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;

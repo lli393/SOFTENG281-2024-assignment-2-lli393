@@ -2,7 +2,13 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
 
-public class MediumLevel extends AIInstance {
+/**
+ * Medium Level class gets the strategy if player have chosen medium difficulty base on which round
+ * player is on.
+ *
+ * <p>Random strategy for the first three round, then switch to top strategy.
+ */
+public class MediumLevel extends ArtificialIntelligence {
   Choice choice;
   int evenCount;
   int oddCount;

@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** RandomStrategy class gets a random number range from 0 to 5 without other considerations. */
 public class RandomStrategy implements Strategy {
 
   @Override

@@ -2,11 +2,25 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
 
-public class HardLevel extends AIInstance {
+/**
+ * HardLevel class gets the strategy if player have chosen hard difficulty base on the player's
+ * choice and their predominant choice are tends to be even or odd.
+ *
+ * <p>Stay in random strategy for first three round and switch between top and random strategy every
+ * time after player has won the last round.
+ */
+public class HardLevel extends ArtificialIntelligence {
   Choice choice;
   int evenCount;
   int oddCount;
 
+  /**
+   * This constructor gets the player's choice, therefore pass on to top strategy can determine
+   * which choice ai would have to choose to win the game.
+   *
+   * @param choice choice chosen by player at the start of the game, determine the sum is either odd
+   *     or even to win the game.
+   */
   public HardLevel(Choice choice) {
 
     this.choice = choice;
