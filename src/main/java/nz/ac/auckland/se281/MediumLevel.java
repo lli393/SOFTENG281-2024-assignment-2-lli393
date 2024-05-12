@@ -9,9 +9,9 @@ import nz.ac.auckland.se281.Main.Choice;
  * <p>Random strategy for the first three round, then switch to top strategy.
  */
 public class MediumLevel extends ArtificialIntelligence {
-  Choice choice;
-  int evenCount;
-  int oddCount;
+  protected Choice choice;
+  protected int evenCount;
+  protected int oddCount;
 
   public MediumLevel(Choice choice) {
     this.choice = choice;

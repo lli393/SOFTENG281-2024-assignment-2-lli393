@@ -15,7 +15,9 @@ public class TopStrategy implements Strategy {
 
   /**
    * This method returns one even number or odd number base on player's choice and player's
-   * predominant choice.
+   * predominant choice. If player chooses even, ai would like the sum of both player and ai's input
+   * to be odd (opposite to player), therefore if player's predominant choice is even, ai would
+   * generate odd numbers for an odd sum, vice versa.
    *
    * @param choice player's choice to win, ai win by doing the opposite
    * @param evenCount count of if player's input is even

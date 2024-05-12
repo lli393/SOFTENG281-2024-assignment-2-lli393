@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-/** Easy Level class gets random strategy in every round */
+/** Easy Level class gets random strategy in every round. */
 public class EasyLevel extends ArtificialIntelligence {
 
   @Override

@@ -10,7 +10,8 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class DifficultyFactory {
 
   /**
-   * This method returns an ai base on the difficulty and passes the choice of player to win.
+   * This method returns an ai base on the difficulty and passes the choice of player to win. This
+   * is created once every new game, variable doesn't change during each game.
    *
    * @param difficulty difficulty (easy, medium, hard) of the game base on player's input
    * @param choice player's choice (even, odd) of winning, if sum number is even or odd as the same

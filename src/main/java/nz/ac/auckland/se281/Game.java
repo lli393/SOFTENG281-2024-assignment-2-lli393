@@ -83,7 +83,7 @@ public class Game {
     // print player's name and finger input amount
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerInput);
 
-    // get aiInput from method in aiInstance class
+    // get aiInput from method in ArtificialIntelligence class
     aiInput = ArtificialIntelligence.getRobotNumber(evenCount, win);
 
     // print ai's name and finger input amount
