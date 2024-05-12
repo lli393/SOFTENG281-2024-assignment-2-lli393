@@ -2,29 +2,23 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
 
-public class MediumLevel implements DifficultyLevel {
-
-  int roundNumber;
+public class MediumLevel extends AIInstance {
   Choice choice;
   int evenCount;
   int oddCount;
 
-  public MediumLevel(int roundNumber, Choice choice, int evenCount) {
-    this.roundNumber = roundNumber;
+  public MediumLevel(Choice choice) {
     this.choice = choice;
-    this.evenCount = evenCount;
-    oddCount = roundNumber - evenCount;
   }
 
   @Override
-  public AIInstance getStrategy() {
+  public Strategy getStrategy(int evenCount, int oddCount, boolean win) {
 
     // use random strategy for the first 3 round, switch to top strategy afterwards
     if (roundNumber <= 3) {
-      return new AIInstance(new RandomStrategy());
+      return new RandomStrategy();
     } else {
-
-      return new AIInstance(new TopStrategy(choice, evenCount, oddCount));
+      return new TopStrategy(choice, evenCount, oddCount);
     }
   }
 }

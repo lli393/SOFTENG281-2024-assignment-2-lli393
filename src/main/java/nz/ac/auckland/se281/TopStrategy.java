@@ -40,7 +40,6 @@ public class TopStrategy implements Strategy {
         return Utils.getRandomNumberRange(0, 5);
       }
     }
-
     return -1;
   }
 }

@@ -2,43 +2,36 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
 
-public class HardLevel implements DifficultyLevel {
-  int roundNumber;
+public class HardLevel extends AIInstance {
   Choice choice;
   int evenCount;
   int oddCount;
-  boolean win;
 
-  // create ai
-  AIInstance ai = new AIInstance(new RandomStrategy());
+  public HardLevel(Choice choice) {
 
-  public HardLevel(int roundNumber, Choice choice, int evenCount, boolean win) {
-    this.roundNumber = roundNumber;
     this.choice = choice;
-    this.evenCount = evenCount;
-    oddCount = roundNumber - evenCount;
-    this.win = win;
+    // counts doesn't include for this round, so minus 1
+    oddCount = roundNumber - evenCount - 1;
   }
 
   @Override
-  public AIInstance getStrategy() {
+  public Strategy getStrategy(int evenCount, int oddCount, boolean win) {
 
-    // use random strategy for the first 3 round, switch to random or top strategy afterwards
+    // use random strategy for the first 3 round, can switch between random or top strategy
+    // afterwards
     if (roundNumber <= 3) {
-      return ai;
-    } else if (win || roundNumber == 4) {
+      strategy = new RandomStrategy();
+    } else if (roundNumber > 3 && win) {
       // if player win and ai lose, switch the strategy
-      // if ai is at random strategy change to top
-      if (ai.getAIStrategy() instanceof RandomStrategy) {
-        ai.setStrategy(new TopStrategy(choice, evenCount, oddCount));
-        // else if ai is at top change to random
-      } else {
-        ai.setStrategy(new RandomStrategy());
+      // if ai is at random strategy change to top strategy
+      if (strategy instanceof RandomStrategy) {
+        strategy = new TopStrategy(choice, evenCount, oddCount);
+      } else if (strategy instanceof TopStrategy) {
+        // if ai is at top strategy change to random strategy
+        strategy = new RandomStrategy();
       }
-      return ai;
-    } else {
-      // keep the strategy
-      return ai;
     }
+
+    return strategy;
   }
 }

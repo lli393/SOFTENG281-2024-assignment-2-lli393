@@ -1,10 +1,10 @@
 package nz.ac.auckland.se281;
 
-public class EasyLevel implements DifficultyLevel {
+public class EasyLevel extends AIInstance {
 
   @Override
-  public AIInstance getStrategy() {
-    // create random object
-    return new AIInstance(new RandomStrategy());
+  public Strategy getStrategy(int evenCount, int oddCount, boolean win) {
+    // use random strategy
+    return new RandomStrategy();
   }
 }

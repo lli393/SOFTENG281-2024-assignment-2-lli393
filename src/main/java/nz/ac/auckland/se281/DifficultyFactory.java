@@ -5,23 +5,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class DifficultyFactory {
 
-  int roundNumber;
-  // get amount of
-  int evenCount;
-
-  // get player's choice
-  Choice choice;
-  // get if player won last round
-  boolean win;
-
-  public DifficultyFactory(int roundNumber, int evenCount, Choice choice, boolean win) {
-    this.roundNumber = roundNumber;
-    this.evenCount = evenCount;
-    this.choice = choice;
-    this.win = win;
-  }
-
-  public DifficultyLevel createDifficulty(Difficulty difficulty) {
+  public AIInstance createDifficulty(Difficulty difficulty, Choice choice) {
 
     switch (difficulty) {
       case EASY:
@@ -30,11 +14,11 @@ public class DifficultyFactory {
 
       case MEDIUM:
         // if the difficulty is medium, use a Medium
-        return new MediumLevel(roundNumber, choice, evenCount);
+        return new MediumLevel(choice);
 
       case HARD:
         // if the difficulty is hard, use a Hard
-        return new HardLevel(roundNumber, choice, evenCount, win);
+        return new HardLevel(choice);
     }
     return null;
   }
