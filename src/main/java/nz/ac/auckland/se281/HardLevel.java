@@ -10,9 +10,10 @@ import nz.ac.auckland.se281.Main.Choice;
  * time after player has won the last round.
  */
 public class HardLevel extends ArtificialIntelligence {
-  Choice choice;
-  int evenCount;
-  int oddCount;
+  protected Choice choice;
+  protected int evenCount;
+  protected int oddCount;
+  protected Strategy strategy;
 
   /**
    * This constructor gets the player's choice, therefore pass on to top strategy can determine

@@ -1,6 +1,5 @@
 package nz.ac.auckland.se281;
 
-import nz.ac.auckland.se281.Main.Choice;
 
 /**
  * ArtificialIntelligence can be used to get a number, get strategy and set strategy. It provide a
@@ -8,11 +7,10 @@ import nz.ac.auckland.se281.Main.Choice;
  */
 public abstract class ArtificialIntelligence {
 
-  int roundNumber;
-  Choice choice;
-  int evenCount;
-  int oddCount;
-  boolean win;
+  protected int roundNumber;
+  protected int evenCount;
+  protected int oddCount;
+  protected boolean win;
 
   private Strategy strategy;
 
